@@ -1,0 +1,7 @@
+.shop{
+    text-align: center;    
+}
+.products{
+    display: flex;
+    justify-content: center;
+}

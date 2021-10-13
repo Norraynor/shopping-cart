@@ -2,7 +2,8 @@ import '../styles/Nav.css';
 import React from 'react';
 import { Link  } from "react-router-dom";
 
-function Nav() {
+function Nav(props) {
+  //if props.count >0 then show number on shopping cart
   return (
     <div className="nav">
         <ul>

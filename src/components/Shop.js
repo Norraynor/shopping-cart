@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import '../styles/Shop.css';
 
 import Product from "./Product";
@@ -20,13 +21,36 @@ function Shop(props) {
             price: 1000000            
         }        
     ]
+    const [item,setItem] = useState("");
+    const [itemsArr,setItemsArr] = useState([]);
+    function addItem(itemName){
+        setItem(itemName);
+        //props.addItem(item);
+    }
+    //dodac count do listy items... checkCart powinien zaktualizowac liste wg count... ustawic liczbe dla Nav... dodac liste do shopping cart
+    function checkCart(){
+    let newItems = [];
+    if(itemsArr.includes(item)){
+      newItems=itemsArr.map(element=>{
+        if(element.name === props.itemName){
+          element.count++;
+        }
+        return element;
+      })
+    }
+    else{
+      setItem({name: props.itemName, count:1});
+      newItems.concat(item)
+    }
+    setItemsArr(newItems);
+  }
     return (
       <div className="shop">
         <h1>Banana Shop</h1>
         <div className="products">
         {
             items.map((item)=>{
-                return <Product data={item} addItem={props.addItem}/>
+                return <Product key={item.name} data={item} addItem={addItem}/>
             })
         }
         </div>

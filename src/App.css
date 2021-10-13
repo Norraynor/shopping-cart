@@ -52,3 +52,9 @@
     transform: translateX(20%);
   }
 }
+h2{
+  color: black
+}
+h2:hover{
+  color:green;
+}

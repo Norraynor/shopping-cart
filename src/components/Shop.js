@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import '../styles/Shop.css';
 
 import Product from "./Product";
@@ -8,39 +8,53 @@ function Shop(props) {
         {
             name: "Teen Banana",
             img: "https://media.istockphoto.com/photos/green-plantain-picture-id138001887?k=20&m=138001887&s=612x612&w=0&h=UGD5rUs37gxxPlNnFliHm001nyf4QNCjmo7nuOAlY0o=",
-            price: 1            
+            price: 1,
+            count: 0            
         },
         {
             name: "Banana",
             img: "https://static.turbosquid.com/Preview/2014/07/03__18_47_33/banana_03.jpgbde52cae-2ae2-483f-bf01-645136084da8Larger.jpg",
-            price: 200
+            price: 200,
+            count: 0
         },
         {
             name: "Dead Banana",
             img: "https://media.istockphoto.com/photos/rotten-banana-picture-id519714894?s=612x612",
-            price: 1000000            
+            price: 1000000,
+            count: 0          
         }        
     ]
-    const [item,setItem] = useState("");
     const [itemsArr,setItemsArr] = useState([]);
     function addItem(itemName){
-        setItem(itemName);
+        checkCart(itemName);
+        countItems();
+        props.addItems(itemsArr);
         //props.addItem(item);
     }
-    //dodac count do listy items... checkCart powinien zaktualizowac liste wg count... ustawic liczbe dla Nav... dodac liste do shopping cart
-    function checkCart(){
-    let newItems = [];
-    if(itemsArr.includes(item)){
+    function countItems(){
+      props.count(itemsArr.length);
+    }
+    
+    function checkCart(itemName){
+      console.log(itemsArr)
+      if(itemName === ""){
+        return;
+      }
+    let newItems = itemsArr;
+    let itemExists= itemsArr.filter((obj)=>{
+      return obj.name===itemName;
+    })
+    console.log("item: "+itemExists);
+    if(itemExists.length>0){
       newItems=itemsArr.map(element=>{
-        if(element.name === props.itemName){
+        if(element.name === itemName){
           element.count++;
         }
         return element;
       })
     }
     else{
-      setItem({name: props.itemName, count:1});
-      newItems.concat(item)
+      newItems =itemsArr.concat({name: itemName, count:1});
     }
     setItemsArr(newItems);
   }

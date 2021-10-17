@@ -1,6 +1,5 @@
-//import './ShoppingCart.css';
+import '../styles/ShoppingCart.css';
 
-import { useState } from "react";
 
 function ShoppingCart(props) {
   //get item and increase amount ---return number of items  
@@ -10,16 +9,19 @@ function ShoppingCart(props) {
       <h1>Shopping Cart</h1>
       {
         props.items.map(element=>{
-          return (
-            <div className="cart-product">
-              <h2>{element.name}</h2>
-              <h3>{element.count}</h3>
-              <button>-</button>
-              <button>+</button>
-              <button>del</button>
-            </div>
-            )
-        })
+            return (
+              <div className="cart-product" key={element.name}>
+                <h2>{element.name}</h2>
+                <h3>{element.count}</h3>
+                <button>-</button>
+                <button>+</button>
+                <button>del</button>
+              </div>
+              )
+          })        
+      }
+      {
+        console.log(props.items)
       }
     </div>
   );

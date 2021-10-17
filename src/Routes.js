@@ -6,10 +6,10 @@ import Shop from "./components/Shop";
 import ShoppingCart from "./components/ShoppingCart";
 
 function Routes() {
-  const [item,setItem] = useState("")
+  const [items,setItems] = useState([])
   const [count,setCount] = useState(0);
-  function receiveItem(data){
-    setItem(data);
+  function receiveItems(data){
+    setItems(data);
     console.log("shop changed item")
   }
   function receiveCount(data){
@@ -20,8 +20,8 @@ function Routes() {
         <Nav count={count}/>
         <Switch>
             <Route exact path="/" component={App}/>
-            <Route exact path="/shop" render={(props)=> <Shop {...props} addItem={receiveItem}/>}/>
-            <Route exact path="/shopping-cart" render={(props)=> <ShoppingCart {...props} itemName={item} data={receiveCount}/>}/>
+            <Route exact path="/shop" render={(props)=> <Shop {...props} addItems={receiveItems} count={receiveCount}/>}/>
+            <Route exact path="/shopping-cart" render={(props)=> <ShoppingCart {...props} items={items} />}/>
         </Switch>
       </BrowserRouter>
   );

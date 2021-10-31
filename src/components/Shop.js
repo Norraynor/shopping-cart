@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import '../styles/Shop.css';
 
 import Product from "./Product";
@@ -24,11 +24,17 @@ function Shop(props) {
             count: 0          
         }        
     ]
-    const [itemsArr,setItemsArr] = useState([]);
-    function addItem(itemName){
-        checkCart(itemName);
-        countItems();
+    const [itemsArr,setItemsArr] = useState(props.currentItems);
+    useEffect(()=>{
+      function handleChange(props){
         props.addItems(itemsArr);
+        countItems();
+      }
+      handleChange(props);
+    },[itemsArr])
+
+    function addItem(item){
+        checkCart(item.name);
         //props.addItem(item);
     }
     function countItems(){
@@ -36,28 +42,26 @@ function Shop(props) {
     }
     
     function checkCart(itemName){
-      console.log(itemsArr)
       if(itemName === ""){
-        return;
+        return false;
       }
-    let newItems = itemsArr;
-    let itemExists= itemsArr.filter((obj)=>{
-      return obj.name===itemName;
-    })
-    console.log("item: "+itemExists);
-    if(itemExists.length>0){
-      newItems=itemsArr.map(element=>{
-        if(element.name === itemName){
-          element.count++;
-        }
-        return element;
+      let newItems = itemsArr;
+      let itemExists= itemsArr.filter((obj)=>{
+        return obj.name===itemName;
       })
+      if(itemExists.length>0){
+        newItems=itemsArr.map(element=>{
+          if(element.name === itemName){
+            element.count++;
+          }
+          return element;
+        })
+      }
+      else{
+        newItems =itemsArr.concat({name: itemName, count:1});
+      }
+      setItemsArr(newItems);
     }
-    else{
-      newItems =itemsArr.concat({name: itemName, count:1});
-    }
-    setItemsArr(newItems);
-  }
     return (
       <div className="shop">
         <h1>Banana Shop</h1>

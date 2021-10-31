@@ -3,7 +3,7 @@ import '../styles/Product.css';
 function Product(props) {
     function handleClick(event){
         //add item to cart
-        props.addItem(props.data.name)
+        props.addItem(props.data)
     }
     return (
       <div className="product">

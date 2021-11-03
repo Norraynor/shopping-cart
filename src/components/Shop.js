@@ -33,15 +33,15 @@ function Shop(props) {
       handleChange(props);
     },[itemsArr])
 
-    function addItem(item){
-        checkCart(item.name);
+    function addItem(item,count){
+        checkCart(item.name,count);
         //props.addItem(item);
     }
     function countItems(){
       props.count(itemsArr.length);
     }
     
-    function checkCart(itemName){
+    function checkCart(itemName,count){
       if(itemName === ""){
         return false;
       }
@@ -52,13 +52,14 @@ function Shop(props) {
       if(itemExists.length>0){
         newItems=itemsArr.map(element=>{
           if(element.name === itemName){
-            element.count++;
+            element.count=parseInt(element.count);
+            element.count+=parseInt(count);
           }
           return element;
         })
       }
       else{
-        newItems =itemsArr.concat({name: itemName, count:1});
+        newItems =itemsArr.concat({name: itemName, count:count});
       }
       setItemsArr(newItems);
     }

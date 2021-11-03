@@ -32,5 +32,27 @@
     margin: 0;
     width:100%;
     position: absolute;
-    bottom: 40px;
+    bottom: 65px;
+}
+#amount{
+    display:flex;
+    position: absolute;
+    bottom:42px;
+}
+#amount input{
+    width:70%;
+}
+#amount button{
+    width:12%;
+    height: auto;
+    position: relative;
+    color:black;
+    bottom: auto;
+    right: auto;
+}
+#subtract{
+    margin-left: 1.5%;
+}
+#add{
+    margin-right: 1.5%;
 }

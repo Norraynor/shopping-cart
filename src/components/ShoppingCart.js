@@ -61,6 +61,7 @@ function ShoppingCart(props) {
               )
           })      
       }
+      <button id="checkout" onClick={()=>{alert("you cant checkout")}}>CHECKOUT!!!</button>  
       <button id="clear" onClick={clearCart}>CLEAR CART</button>  
     </div>
   );

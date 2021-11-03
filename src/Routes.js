@@ -19,12 +19,12 @@ function Routes() {
     setCount(data);
   }
   return (
-      <BrowserRouter>
+      <BrowserRouter basename={"shopping-cart/"}>
         <Nav count={count}/>
         <Switch>
             <Route exact path="/" component={App}/>
             <Route exact path="/shop" render={(props)=> <Shop {...props} addItems={receiveItems} count={receiveCount} currentItems={items}/>}/>
-            <Route exact path="/shopping-cart" render={(props)=> <ShoppingCart {...props} items={items} changeItems={receiveItems} count={receiveCount}/>}/>
+            <Route exact path="/cart" render={(props)=> <ShoppingCart {...props} items={items} changeItems={receiveItems} count={receiveCount}/>}/>
         </Switch>
       </BrowserRouter>
   );

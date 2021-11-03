@@ -9,7 +9,7 @@ function Nav(props) {
         <ul>
             <li><Link className="link" to="/">Home</Link></li>
             <li><Link className="link" to="/shop">Shop</Link></li>
-            <li><Link className="link" to="/shopping-cart">Shopping Cart</Link> {props.count}</li>
+            <li><Link className="link" to="/cart">Shopping Cart</Link> {props.count}</li>
         </ul>
     </div>
   );
